@@ -6,6 +6,8 @@ Js.log("Hello, BuckleScript and Reason!");
 let greeting = "foo";
 Js.log({j|Hello $greeting from `console.log` using string templates|j});
 
+let log = Js.log;
+
 print_string("Hello, using OCaml `print_string`!\n");
 
 let doubleInt = x => x * 2;
@@ -56,7 +58,36 @@ let eitherToString = (data) =>
   };
 
 let eitherToStringLog = Js.log <|| eitherToString;
-
 eitherToStringLog(Left("Danger Will Robinson"));
 eitherToStringLog(Right(0, 7));
 eitherToStringLog(Right(52, 104));
+
+type person = {
+  name: string,
+  age: int,
+};
+
+let rob = {
+  name: "Rob",
+  age: 31,
+}
+
+let ally = {
+  name: "Ally",
+  age: 30,
+}
+
+
+
+let getPersonInfo = (data) =>
+  switch data {
+  | ({ name: "Rob" } | { name: "Ally" }) as x => {
+    let { name, age } = x;
+    {j|"$name" is $age years old|j}
+  }
+  | (x) => "Some other person with the name: \"" ++ x.name ++ "\" is " ++ string_of_int(x.age) ++ " years old.";
+  };
+
+rob |> getPersonInfo |> log;
+ally |> getPersonInfo |> log;
+{ name: "Jerry", age: 82 } |> getPersonInfo |> log;

@@ -14,6 +14,11 @@ var greeting = "foo";
 
 console.log("Hello " + (String(greeting) + " from `console.log` using string templates"));
 
+function log(prim) {
+  console.log(prim);
+  return /* () */0;
+}
+
 Pervasives.print_string("Hello, using OCaml `print_string`!\n");
 
 function doubleInt(x) {
@@ -85,6 +90,47 @@ eitherToStringLog(/* Right */Block.__(1, [
         104
       ]));
 
+var rob = /* record */[
+  /* name */"Rob",
+  /* age */31
+];
+
+var ally = /* record */[
+  /* name */"Ally",
+  /* age */30
+];
+
+function getPersonInfo(data) {
+  var exit = 0;
+  switch (data[/* name */0]) {
+    case "Ally" : 
+    case "Rob" : 
+        exit = 1;
+        break;
+    default:
+      return "Some other person with the name: \"" + (data[/* name */0] + ("\" is " + (String(data[/* age */1]) + " years old.")));
+  }
+  if (exit === 1) {
+    return "\"" + (String(data[/* name */0]) + ("\" is " + (String(data[/* age */1]) + " years old")));
+  }
+  
+}
+
+var prim = getPersonInfo(rob);
+
+console.log(prim);
+
+var prim$1 = getPersonInfo(ally);
+
+console.log(prim$1);
+
+var prim$2 = getPersonInfo(/* record */[
+      /* name */"Jerry",
+      /* age */82
+    ]);
+
+console.log(prim$2);
+
 var btc = /* BTC */0;
 
 var eth = /* ETH */1;
@@ -92,6 +138,7 @@ var eth = /* ETH */1;
 var ltc = /* LTC */2;
 
 exports.greeting = greeting;
+exports.log = log;
 exports.doubleInt = doubleInt;
 exports.doubleFloat = doubleFloat;
 exports.doubleString = doubleString;
@@ -101,4 +148,7 @@ exports.ltc = ltc;
 exports.coinToString = coinToString;
 exports.eitherToString = eitherToString;
 exports.eitherToStringLog = eitherToStringLog;
+exports.rob = rob;
+exports.ally = ally;
+exports.getPersonInfo = getPersonInfo;
 /*  Not a pure module */
