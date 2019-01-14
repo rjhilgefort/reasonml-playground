@@ -1,4 +1,5 @@
 /* Note To Self: Turn off ligatures */
+
 let condLog = (shouldLog: bool, message: 'a): unit => {
   if (shouldLog) {
     Js.log(message);
@@ -21,6 +22,8 @@ log((++)("foo", "bar"));
 log(Pervasives.(++)("foo", "bar"))
 
 log({j|Hello $greeting from `console.log` using string templates|j});
+
+log @@ "You can use @@ when there is a function with a single argument";
 
 /* print_string("Hello, using OCaml `print_string`!\n"); */
 
