@@ -35,8 +35,13 @@ function doubleFloat(x) {
   return x * 2;
 }
 
+console.log(5.2 * 2);
+
+console.log((16 + 1.7) * 2);
+
 function log(param) {
-  return 0;
+  console.log(param);
+  return /* () */0;
 }
 
 function doubleString(param) {

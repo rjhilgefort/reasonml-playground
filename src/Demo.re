@@ -61,15 +61,16 @@ let switchExpression = switch switchExpressionParam {
 log(switchExpression);
 
 /**********************************************************
-  Functionas and Piping
+  Functions and Piping
 */
-let log = condLog(false);
+let log = condLog(true);
 
 let doubleInt = (x) => {
   x * 2
 };
 let doubleFloat = x => x *. 2.;
 
+/* const foo = log(doubleFloat(5.2)) */
 5.2 |> doubleFloat |> log;
 
 8 
@@ -83,11 +84,13 @@ let doubleFloat = x => x *. 2.;
   Function Composition (As opposed to value piping)
   https://github.com/jonlaing/rationale
 */
-let log = condLog(false);
+let log = condLog(true);
 
 open Rationale.Function;
 type doubleStringT = string => string;
 let doubleString: doubleStringT = string_of_int <|| doubleInt <|| int_of_string;
+/* let doubleString: doubleStringT = x => x |> int_of_string |> doubleInt |> string_of_int; */
+/* const doubleString = x => string_of_int(doubleInt(int_of_string(x))) */
 /* const doubleString = R.compose(string_of_int, doubleInt, int_of_string) */
 /* const doubleString = _.flowLeft(string_of_int, doubleInt, int_of_string) */
 
