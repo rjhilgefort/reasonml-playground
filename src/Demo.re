@@ -14,13 +14,14 @@ let log = condLog(false);
 /* let === const */
 let greeting = "foo";
 
-Js.log("\n\n\n\n\n--------------------------------------------------------------------");
+Js.log("\n\n\n\n\n-----------------------------------------------------------------");
 log("Hello, BuckleScript and Reason!");
 
 log("foo" ++ "bar");
 log((++)("foo", "bar"));
 log(Pervasives.(++)("foo", "bar"))
 
+/* console.log(`Hello ${greeting} ...`) */
 log({j|Hello $greeting from `console.log` using string templates|j});
 
 log @@ "You can use @@ when there is a function with a single argument";
@@ -63,7 +64,7 @@ log(switchExpression);
 /**********************************************************
   Functions and Piping
 */
-let log = condLog(true);
+let log = condLog(false);
 
 let doubleInt = (x) => {
   x * 2
@@ -84,9 +85,10 @@ let doubleFloat = x => x *. 2.;
   Function Composition (As opposed to value piping)
   https://github.com/jonlaing/rationale
 */
-let log = condLog(true);
+let log = condLog(false);
 
 open Rationale.Function;
+
 type doubleStringT = string => string;
 let doubleString: doubleStringT = string_of_int <|| doubleInt <|| int_of_string;
 /* let doubleString: doubleStringT = x => x |> int_of_string |> doubleInt |> string_of_int; */
@@ -94,6 +96,7 @@ let doubleString: doubleStringT = string_of_int <|| doubleInt <|| int_of_string;
 /* const doubleString = R.compose(string_of_int, doubleInt, int_of_string) */
 /* const doubleString = _.flowLeft(string_of_int, doubleInt, int_of_string) */
 
+"5" |> doubleString |> log;
 (log <|| doubleString)("5");
 
 /**********************************************************

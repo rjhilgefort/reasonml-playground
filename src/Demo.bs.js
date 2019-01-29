@@ -17,7 +17,7 @@ function condLog(shouldLog, message) {
 
 var greeting = "foo";
 
-console.log("\n\n\n\n\n--------------------------------------------------------------------");
+console.log("\n\n\n\n\n-----------------------------------------------------------------");
 
 "Hello " + (String(greeting) + " from `console.log` using string templates");
 
@@ -35,13 +35,8 @@ function doubleFloat(x) {
   return x * 2;
 }
 
-console.log(5.2 * 2);
-
-console.log((16 + 1.7) * 2);
-
 function log(param) {
-  console.log(param);
-  return /* () */0;
+  return 0;
 }
 
 function doubleString(param) {
@@ -51,6 +46,8 @@ function doubleString(param) {
                             }), doubleInt, param);
               }), Caml_format.caml_int_of_string, param);
 }
+
+doubleString("5");
 
 Function$Rationale.$less$pipe$pipe(log, doubleString, "5");
 
