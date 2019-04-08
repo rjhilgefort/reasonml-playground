@@ -1,6 +1,12 @@
 {
   "name": "reasonml-playground",
   "version": "0.1.0",
+  "author": "rjhilgefort@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "ReasonML",
+    "BuckleScript"
+  ],
   "scripts": {
     "start": "node ./src/Demo.bs.js",
     "start:watch": "onchange -i -k '**/*.re' -- run-s re:build start",
@@ -9,11 +15,6 @@
     "re:clean": "bsb -clean-world",
     "re:lint:fix": "find ./src -type f -name '*.re' | xargs ./node_modules/.bin/refmt --in-place"
   },
-  "keywords": [
-    "BuckleScript"
-  ],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "rationale": "^0.1.10"
   },

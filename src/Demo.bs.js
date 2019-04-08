@@ -2,9 +2,52 @@
 'use strict';
 
 var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
+var $$String = require("bs-platform/lib/js/string.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
+var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var Function$Rationale = require("rationale/src/Function.js");
+
+function setctionBreak(log, section) {
+  var decoratedSection = "--- " + (String(section) + " ---");
+  var __x = decoratedSection.length;
+  var border = $$String.make(__x, /* "-" */45);
+  Curry._1(log, "\n\n\n");
+  Curry._1(log, border);
+  Curry._1(log, decoratedSection);
+  Curry._1(log, border);
+  return /* () */0;
+}
+
+function repeatFor(times, toRepeat) {
+  var ret = "";
+  for(var _for = times; _for >= 1; --_for){
+    ret = ret + toRepeat;
+  }
+  return ret;
+}
+
+function repeatWhile(times, toRepeat) {
+  var i = times;
+  var ret = "";
+  while(i > 0) {
+    ret = ret + toRepeat;
+    i = i - 1 | 0;
+  };
+  return ret;
+}
+
+console.log(repeatFor(100, "\n"));
+
+setctionBreak((function (prim) {
+        console.log(prim);
+        return /* () */0;
+      }), "Loops, Mutating");
+
+console.log(repeatFor(3, "for-"));
+
+console.log(repeatWhile(3, "while-"));
 
 function condLog(shouldLog, message) {
   if (shouldLog) {
@@ -15,17 +58,39 @@ function condLog(shouldLog, message) {
   }
 }
 
+function log(param) {
+  return 0;
+}
+
+setctionBreak(log, "Currying, Partial Apps, Types");
+
+function log$1(param) {
+  return 0;
+}
+
+setctionBreak(log$1, "Pervasives, Infix Operators");
+
 var greeting = "foo";
 
-console.log("\n\n\n\n\n-----------------------------------------------------------------");
-
 "Hello " + (String(greeting) + " from `console.log` using string templates");
+
+function log$2(param) {
+  return 0;
+}
+
+setctionBreak(log$2, "Expressions, Blocks, Implicit Returns, Switches");
 
 var blockExpression = "" + (String("a") + (" and " + (String("b") + "")));
 
 var switchExpressionParam = "marco";
 
 var switchExpression = switchExpressionParam === "marco" ? "polo" : "Unnecessary catch all handler";
+
+function log$3(param) {
+  return 0;
+}
+
+setctionBreak(log$3, "Expressions, Blocks, Implicit Returns, Switches");
 
 function doubleInt(x) {
   return (x << 1);
@@ -35,9 +100,15 @@ function doubleFloat(x) {
   return x * 2;
 }
 
-function log(param) {
+Pervasives.string_of_float(5.2 * 2);
+
+Pervasives.string_of_float((16 + 1.7) * 2);
+
+function log$4(param) {
   return 0;
 }
+
+setctionBreak(log$4, "Function Composition, Modules");
 
 function doubleString(param) {
   return Function$Rationale.$less$pipe$pipe((function (param) {
@@ -49,9 +120,15 @@ function doubleString(param) {
 
 doubleString("5");
 
-Function$Rationale.$less$pipe$pipe(log, doubleString, "5");
+Function$Rationale.$less$pipe$pipe(log$4, doubleString, "5");
 
-function coinToString(x) {
+function log$5(param) {
+  return 0;
+}
+
+setctionBreak(log$5, "Variants");
+
+function string_of_coin(x) {
   switch (x) {
     case 0 : 
         return "`x` was BTC";
@@ -63,15 +140,17 @@ function coinToString(x) {
   }
 }
 
-coinToString(/* BTC */0);
+string_of_coin(/* BTC */0);
 
-coinToString(/* ETH */1);
+string_of_coin(/* ETH */1);
 
-function log$1(param) {
+function log$6(param) {
   return 0;
 }
 
-function eitherToString(data) {
+setctionBreak(log$6, "Pattern Matching, Variant Constructor Args");
+
+function string_of_either(data) {
   if (data.tag) {
     var x = data[0];
     if (x !== 0) {
@@ -84,21 +163,27 @@ function eitherToString(data) {
   }
 }
 
-function eitherToStringLog(param) {
-  return Function$Rationale.$less$pipe$pipe(log$1, eitherToString, param);
+function logEither(param) {
+  return Function$Rationale.$less$pipe$pipe(log$6, string_of_either, param);
 }
 
-eitherToStringLog(/* Left */Block.__(0, ["Danger Will Robinson"]));
+logEither(/* Left */Block.__(0, ["Danger Will Robinson"]));
 
-eitherToStringLog(/* Right */Block.__(1, [
+logEither(/* Right */Block.__(1, [
         0,
         7
       ]));
 
-eitherToStringLog(/* Right */Block.__(1, [
+logEither(/* Right */Block.__(1, [
         52,
         104
       ]));
+
+function log$7(param) {
+  return 0;
+}
+
+setctionBreak(log$7, "Record Type");
 
 var rob = /* record */[
   /* name */"Rob",
@@ -135,6 +220,12 @@ getPersonInfo(/* record */[
       /* age */82
     ]);
 
+function log$8(param) {
+  return 0;
+}
+
+setctionBreak(log$8, "Function/Switch Shorthand");
+
 function getNameVerbose(data) {
   if (data[/* name */0] === "Rob") {
     return "What's up Rob";
@@ -143,17 +234,35 @@ function getNameVerbose(data) {
   }
 }
 
-function getNameShort(x) {
-  if (x[/* name */0] === "Rob") {
+function getNameShort(param) {
+  if (param[/* name */0] === "Rob") {
     return "What's up Rob";
   } else {
-    return "I don\'t know you " + (String(x) + ".name");
+    return "I don\'t know you";
   }
 }
 
 getNameVerbose(rob);
 
 getNameShort(ally);
+
+function log$9(param) {
+  return 0;
+}
+
+setctionBreak(log$9, "Labled Arguments, Option Variant");
+
+function string_of_option_int(param) {
+  if (param !== undefined) {
+    return String(param);
+  } else {
+    return "[None]";
+  }
+}
+
+function logOptionInt(param) {
+  return Function$Rationale.$less$pipe$pipe(log$9, string_of_option_int, param);
+}
 
 function findIndexValue(needle, haystack) {
   if (haystack.length !== 0) {
@@ -170,24 +279,26 @@ var someArray = /* array */[
   "baz"
 ];
 
-findIndexValue("foo", someArray);
+logOptionInt(findIndexValue("foo", someArray));
 
-findIndexValue("baz", someArray);
+logOptionInt(findIndexValue("baz", someArray));
 
-findIndexValue("baz", someArray);
+logOptionInt(findIndexValue("baz", someArray));
 
-findIndexValue("bar", someArray);
+logOptionInt(findIndexValue("bar", someArray));
 
-findIndexValue("bar", someArray);
+logOptionInt(findIndexValue("bar", someArray));
 
-findIndexValue("bar", someArray);
+logOptionInt(findIndexValue("bar", someArray));
 
-function log$2(param) {
+function log$10(param) {
   return 0;
 }
 
+setctionBreak(log$10, "Fast Pipe");
+
 function speak(animal, extra) {
-  log$2(animal[/* kind */0] ? "I\'m a smelly dog, I go by " + (String(animal) + (".name. Here\'s a thought about " + (String(extra) + "."))) : "Hi, I\'m a Cat by the name of " + (String(animal) + (".name and I want to tell you about " + (String(extra) + "!!"))));
+  log$10(animal[/* kind */0] ? "I\'m a smelly dog, I go by " + (String(animal) + (".name. Here\'s a thought about " + (String(extra) + "."))) : "Hi, I\'m a Cat by the name of " + (String(animal) + (".name and I want to tell you about " + (String(extra) + "!!"))));
   return animal;
 }
 
@@ -205,9 +316,11 @@ speak(speak(someCat, "my paws"), "my tail");
 
 speak(someDog, "poop");
 
+var repeat = repeatFor;
+
 var ifElseLet = "value is true";
 
-var a = "file scope 'a'";
+var a = "I'll be unchanged";
 
 var btc = /* BTC */0;
 
@@ -215,6 +328,10 @@ var eth = /* ETH */1;
 
 var ltc = /* LTC */2;
 
+exports.setctionBreak = setctionBreak;
+exports.repeatFor = repeatFor;
+exports.repeat = repeat;
+exports.repeatWhile = repeatWhile;
 exports.condLog = condLog;
 exports.greeting = greeting;
 exports.ifElseLet = ifElseLet;
@@ -225,20 +342,22 @@ exports.switchExpression = switchExpression;
 exports.doubleInt = doubleInt;
 exports.doubleFloat = doubleFloat;
 exports.doubleString = doubleString;
+exports.string_of_coin = string_of_coin;
 exports.btc = btc;
 exports.eth = eth;
 exports.ltc = ltc;
-exports.coinToString = coinToString;
-exports.eitherToString = eitherToString;
-exports.eitherToStringLog = eitherToStringLog;
+exports.string_of_either = string_of_either;
+exports.logEither = logEither;
 exports.rob = rob;
 exports.ally = ally;
 exports.getPersonInfo = getPersonInfo;
 exports.getNameVerbose = getNameVerbose;
 exports.getNameShort = getNameShort;
+exports.string_of_option_int = string_of_option_int;
+exports.logOptionInt = logOptionInt;
 exports.findIndexValue = findIndexValue;
 exports.someArray = someArray;
-exports.log = log$2;
+exports.log = log$10;
 exports.speak = speak;
 exports.someCat = someCat;
 exports.someDog = someDog;
