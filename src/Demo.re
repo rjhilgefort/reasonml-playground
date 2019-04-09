@@ -20,6 +20,7 @@ let setctionBreak = (log: 'a => unit, section: string): unit => {
 
 /**********************************************************
   * Loops: https://reasonml.github.io/docs/en/imperative-loops
+    - A selling point of ReasonML is that it isn't dogmatic, yet prefers FP style.
   * Mutating: https://reasonml.github.io/docs/en/mutation
     - Everything is immutable by default and you have to say when you want to mutate with `ref`.
     - let === const
