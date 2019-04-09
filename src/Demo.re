@@ -7,10 +7,10 @@ let setctionBreak = (log: 'a => unit, section: string): unit => {
   let decoratedSection = {j|--- $section ---|j};
   let border = decoratedSection |> String.length |> String.make(_, '-');
 
-  log @@ "\n\n\n";
-  log @@ border;
-  log @@ decoratedSection;
-  log @@ border;
+  log("\n\n\n");
+  log(border);
+  log(decoratedSection);
+  log(border);
   ();
 };
 
@@ -162,7 +162,7 @@ log(switchExpression);
 
 
 /**********************************************************
-  Functions, Piping
+  Pipe operator
 */
 let log = condLog(false);
 setctionBreak(log, "Expressions, Blocks, Implicit Returns, Switches");
@@ -343,7 +343,7 @@ ally |> getNameShort |> log;
 
 
 /**********************************************************
-  * Labled Arguments
+  * Labeled Arguments
     - Think of the way you do destructured objects in JS as a way to provide args in whatever
       order and just pass them by name- the usage is similar.
     - ReasonReact does this exclusively.
